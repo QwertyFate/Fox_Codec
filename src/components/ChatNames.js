@@ -17,6 +17,7 @@ const ChatNames = ({onSearchUser}) => {
     useEffect(() => {
         axios.get(`http://localhost:5000/getuser`).then((res) => {
             setUserData(res.data);
+            console.log(res.data)
         })
     
     },[])

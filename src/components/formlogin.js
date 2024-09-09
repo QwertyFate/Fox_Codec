@@ -23,7 +23,6 @@ const FormLogin = () => {
         } else {
             axios.post(`http://localhost:5000/Login`, event)
             .then(res => {
-                console.log(res)
                 if(res.data !== "Wrong username or password") {
                     navigate("/home")
                 }else{

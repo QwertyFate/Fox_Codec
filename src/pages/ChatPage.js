@@ -12,7 +12,7 @@ const ChatPage = () => {
     return(
         <div className="w-full flex flex-row h-dvh">
             <SideChat handleFriend={getFriendID}  />
-            <MainChat />
+            <MainChat friendData={friendid}/>
         </div>
     )
 }
