@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 const FormLogin = () => {
     const navigate = useNavigate()
-    const {register,  handleSubmit, formState: {errors}, watch} = useForm();
+    const {register,  handleSubmit,resetField,reset , formState: {errors}, watch} = useForm();
     const [registerbutton, setRegisterbutton] = useState(false);
     
 
@@ -23,11 +23,15 @@ const FormLogin = () => {
         } else {
             axios.post(`http://localhost:5000/Login`, event)
             .then(res => {
-                if(res.data !== "Wrong username or password") {
-                    navigate("/home")
+                if(res.data.authenticationprocess) {
+                    reset();
+                    navigate("/home");
+                    localStorage.setItem("userID",res.data.userID)
+
                 }else{
                     alert("wrong password please try again");
                     navigate("/");
+                    resetField("password")
                 }})
         }
         

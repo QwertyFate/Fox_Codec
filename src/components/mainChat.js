@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import MainChatLogo from "../Pictures/Chat_main/logowotext.png"
 import { useForm } from "react-hook-form";
 import ChatMessage from "./chatmessage";
@@ -8,16 +8,38 @@ import axios from "axios";
 
 const MainChat = ({friendData}) => {
     const {register, handleSubmit, reset} = useForm();
+    const userID = localStorage.getItem("userID");
+    const [messages, setMessages] = useState([]);
+    let friendid;
+
+    const getmessage = async () => {
+        friendid = friendData.id
+        let getmessagereq = {
+            user1: userID,
+            user2: friendid
+        };
+        axios.post(`http://localhost:5000/get-messages`, getmessagereq ).then((res) => {
+            setMessages(res.data);
+            console.log(res.data)
+        })
+    }
+
+
+    useEffect(() => {
+        getmessage();
+    },[friendData])
 
     const submitMessage = (e) => {
-        let friendid = friendData.id
+        friendid = friendData.id
         let message = e.content;
         let messageData = {message,friendid }
         console.log(messageData)
         try{
         axios.post(`http://localhost:5000/send-message`, messageData)
             reset();
+            getmessage();
         }catch(error){console.error(error)}
+        
     }
 
     return(
@@ -29,8 +51,12 @@ const MainChat = ({friendData}) => {
                     <h3 className="text-xs"> Active Now</h3>
                 </div>
             </div>
-            <section className="h-4/5 flex">
-                <ChatMessage />
+            <section className="h-4/5 flex flex-col">
+                {messages.map((item,key) => {
+                    return(
+                        <ChatMessage content={item.content} user1={item.sender_id} user2={item.receiver_id} friendname={friendData.username} />
+                    )
+                })}
             </section>
             <section className="w-4/5 fixed bottom-0 flex justify-start">
                 <form onSubmit={handleSubmit(submitMessage)} className="w-full px-4 mb-4 flex" >

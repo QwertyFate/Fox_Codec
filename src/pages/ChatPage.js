@@ -1,8 +1,10 @@
 import React, {useState} from "react";
 import SideChat from "../components/SideChat";
 import MainChat from "../components/mainChat";
+import axios from "axios";
 
 const ChatPage = () => {
+
 
     const [friendid, setFriendid] = useState("");
     const getFriendID = (friendID) => {
