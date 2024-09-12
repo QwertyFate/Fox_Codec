@@ -2,9 +2,11 @@ import React from "react";
 import AvatarPic from "../Pictures/Chat_main/logowotext.png"
 import axios from "axios";
 import { useState, useEffect } from "react";
-
+axios.defaults.baseURL = 'http://192.168.100.14:5000';
 
 const ChatNames = ({onSearchUser}) => {
+
+    const userID = localStorage.getItem("userID");
     const [userData, setUserData] = useState([]);
     const currentTime = new Date();
     const formattedTime = currentTime.toLocaleTimeString("en-US", {
@@ -12,10 +14,10 @@ const ChatNames = ({onSearchUser}) => {
         minute: '2-digit',
     });
 
-
+   
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/getuser`).then((res) => {
+        axios.post(`/getuser`, {userID: userID}).then((res) => {
             setUserData(res.data);
             onSearchUser(res.data[0]);
         })

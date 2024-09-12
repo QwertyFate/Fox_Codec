@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
+axios.defaults.baseURL = 'http://192.168.100.14:5000';
 const FormLogin = () => {
     const navigate = useNavigate()
     const {register,  handleSubmit,resetField,reset , formState: {errors}, watch} = useForm();
@@ -15,13 +15,13 @@ const FormLogin = () => {
     }
     const onSubmit = (event) => {
         if(registerbutton){
-            axios.post(`http://localhost:5000/Register`, event)
+            axios.post(`/Register`, event)
             .then(res => {
                 console.log(res)
                 handleRegisterButton();
             })
         } else {
-            axios.post(`http://localhost:5000/Login`, event)
+            axios.post(`/Login`, event)
             .then(res => {
                 if(res.data.authenticationprocess) {
                     reset();

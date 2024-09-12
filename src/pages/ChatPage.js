@@ -9,7 +9,6 @@ const ChatPage = () => {
     const [friendid, setFriendid] = useState("");
     const getFriendID = (friendID) => {
         setFriendid(friendID);
-        console.log(friendID)
     }
     return(
         <div className="w-full flex flex-row h-dvh">

@@ -7,7 +7,6 @@ import ChatNames from "./ChatNames";
 const SideChat = ({handleFriend}) => {
 
     
-
     return(
         <div className="w-1/4 h-screen bg-slate-500 shadow-[0px_0px_48px_10px_#D7834CBE]">
             <div className="border-b-4 border-orange-400 flex flex-row justify-between items-center mb-0">
