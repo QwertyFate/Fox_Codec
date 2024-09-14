@@ -15,7 +15,6 @@ const MainChat = ({friendData}) => {
     const [roomId, setRoomId] = useState();
     const chatReferenceScroll = useRef(null);
     let roomIdCompile = "";
-    console.log(roomIdCompile)
     useEffect(() => {
         setFriendid(friendData.id);
     }, [friendData]);
@@ -29,6 +28,8 @@ const MainChat = ({friendData}) => {
             setMessages(res.data);
             console.log(res.data)
         })
+
+        socket.emit("joinRoom",roomId);
     }
 
 
@@ -36,7 +37,7 @@ const MainChat = ({friendData}) => {
         getmessage();
         roomIdCompile =[userID,friendid].sort().join("-");
         setRoomId(roomIdCompile)
-        socket.emit("joinRoom",roomId);
+       
         socket.on("newMessage", (data) => {
             console.log("New message received:", data);
             if (
@@ -48,6 +49,7 @@ const MainChat = ({friendData}) => {
 
         return () => {
             socket.off("newMessage");
+            socket.emit("leaveRoom", roomIdCompile);
         };
     },[socket,friendid,userID])
 
@@ -89,7 +91,7 @@ const MainChat = ({friendData}) => {
                 <form onSubmit={handleSubmit(submitMessage)} className="w-full px-4 mb-4 flex" >
                     <input className="w-full font-medium rounded-lg p-2 border border-slate-400"
                     {...register("content",{required: ""})}
-                    placeholder="Type a message"/>
+                    placeholder="Type a message" autoComplete="off"/>
                     <button><img src={MainChatLogo} className="w-10 pl-3" /></button>
                 </form>
             </section>

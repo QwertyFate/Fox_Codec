@@ -17,11 +17,17 @@ const ChatNames = ({onSearchUser}) => {
    
 
     useEffect(() => {
-        axios.post(`/getuser`, {userID: userID}).then((res) => {
-            setUserData(res.data);
-            onSearchUser(res.data[0]);
-        })
-    
+
+        const fetchData = async () => {
+            try {
+                const response = await axios.post(`/getuser`, {userID});
+                setUserData(response.data);
+                if (response.data.length > 0) {
+                    onSearchUser(response.data[0])
+                }
+            }catch (err) {console.log(err)}
+        }
+        fetchData();    
     },[])
     
     const handleClick = (item) => {

@@ -22,11 +22,14 @@ const FormLogin = () => {
             })
         } else {
             axios.post(`/Login`, event)
-            .then(res => {
+            .then( res => {
                 if(res.data.authenticationprocess) {
+                    localStorage.setItem("userID",res.data.userID)
+                    localStorage.setItem("isauthentication", true)
+                    console.log(localStorage.getItem("isauthentication"))
                     reset();
                     navigate("/home");
-                    localStorage.setItem("userID",res.data.userID)
+                   
 
                 }else{
                     alert("wrong password please try again");
@@ -44,7 +47,7 @@ const FormLogin = () => {
                  <h2 className="text-black text-2xl py-6 font-extrabold">{!registerbutton? "Login Now!" : "Register Now" }</h2>
                 <input className="w-50 px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium " 
                 {...register("username", {required: "Username is required"})} 
-                placeholder="Username"/>
+                placeholder="Username" autoComplete="off"/>
                 {errors.username && <span className="text-red-700">{errors.username.message}</span>}
                 <input className="w-full px-6 py-3 mb-2 border border-slate-600 rounded-lg font-medium "
                  type="password"

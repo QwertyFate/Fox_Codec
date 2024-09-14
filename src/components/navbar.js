@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 const NavBar = () => {
     return(
         <div>
-       <Link to={"/"}> <img src={LogoPic} className='w-[400px] relative mt-[50px] mb-14 ml-[100px]' /> </Link>
+       <Link to={"/"}> <img src={LogoPic} className='z-10 w-[400px] relative mt-[50px] mb-14 ml-[100px]' /> </Link>
         <Outlet />
         </div>
     )
