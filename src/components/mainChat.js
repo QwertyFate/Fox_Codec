@@ -12,7 +12,6 @@ const MainChat = ({friendData}) => {
     const userID = localStorage.getItem("userID");
     const [messages, setMessages] = useState([]);
     const [friendid, setFriendid] =  useState(friendData.id);
-    const [roomId, setRoomId] = useState();
     const chatReferenceScroll = useRef(null);
     let roomIdCompile = "";
     useEffect(() => {
@@ -26,20 +25,19 @@ const MainChat = ({friendData}) => {
         };
         axios.post(`/get-messages`, getmessagereq ).then((res) => {
             setMessages(res.data);
-            console.log(res.data)
         })
 
-        socket.emit("joinRoom",roomId);
+        
     }
 
 
     useEffect( () => {
         getmessage();
         roomIdCompile =[userID,friendid].sort().join("-");
-        setRoomId(roomIdCompile)
-       
+        if(friendid){
+       socket.emit("joinRoom",(roomIdCompile));
+        }
         socket.on("newMessage", (data) => {
-            console.log("New message received:", data);
             if (
                 (data.userId == userID && data.friendId == friendData.id) ||
                 (data.userId == friendData.id && data.friendId == userID)){
