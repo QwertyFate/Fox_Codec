@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import ChatMessage from "./chatmessage";
 import axios from "axios";
 import io from "socket.io-client";
-const socket = io.connect("http://192.168.100.14:5000");
-axios.defaults.baseURL = 'http://192.168.100.14:5000';
+const socket = io.connect("https://fox-codec-back.vercel.app");
+axios.defaults.baseURL = 'https://fox-codec-back.vercel.app';
 
 const MainChat = ({friendData}) => {
     const {register, handleSubmit, reset} = useForm();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AvatarPic from "../Pictures/Chat_main/logowotext.png";
 import axios from "axios";
-axios.defaults.baseURL = 'http://192.168.100.14:5000';
+axios.defaults.baseURL = 'https://fox-codec-back.vercel.app';
 
 
 const ChatNames = ({ onSearchUser }) => {
@@ -60,7 +60,7 @@ const ChatNames = ({ onSearchUser }) => {
         const isClicked = clickedItem === item.id
 
         return (
-            <div onClick={() => handleClick(item)} className={`flex flex-row pt-8 cursor-pointer ${isClicked? "opacity-50 bg-slate-400" : ""} hover:opacity-50`} key={item.id}>
+            <div onClick={() => handleClick(item)} className={`rounded-xl pb-5 flex items-center flex-row pt-8 cursor-pointer ${isClicked? "opacity-50 bg-slate-400" : ""} hover:opacity-50`} key={item.id}>
                 <img src={AvatarPic} className="w-10 rounded-full ml-8" alt="Avatar" />
                 <div className="flex flex-col pl-8 justify-center">
                     <h2 className="font-bold">{item.username}</h2>
@@ -71,7 +71,7 @@ const ChatNames = ({ onSearchUser }) => {
     });
 
     return (
-        <div className="overflow-y-scroll h-5/6 no-scrollbar">
+        <div className="overflow-y-scroll h-5/6 no-scrollbar mt-5">
             {chatname}
         </div>
     );

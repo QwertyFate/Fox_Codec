@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-axios.defaults.baseURL = 'http://192.168.100.14:5000';
+axios.defaults.baseURL = 'https://fox-codec-back.vercel.app';
 const FormLogin = () => {
     const navigate = useNavigate()
     const {register,  handleSubmit,resetField,reset , formState: {errors}, watch} = useForm();
