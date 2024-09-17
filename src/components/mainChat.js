@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import ChatMessage from "./chatmessage";
 import axios from "axios";
 import io from "socket.io-client";
-const socket = io.connect("https://fox-codec-back.vercel.app");
-axios.defaults.baseURL = 'https://fox-codec-back.vercel.app';
+const socket = io.connect("https://maze-verbena-rainstorm.glitch.me"); //'http://192.168.100.14:5000'
+axios.defaults.baseURL = 'https://maze-verbena-rainstorm.glitch.me';
 
 const MainChat = ({friendData}) => {
     const {register, handleSubmit, reset} = useForm();
@@ -63,6 +63,7 @@ const MainChat = ({friendData}) => {
         console.log(messageData)
         try{
             socket.emit("sendMessage", { userId: userID, friendId: friendid, message:message });
+            
             setMessages((prevMessages) => [...prevMessages, {sender_id:userID,receiver_id:friendid,content:message}])
             reset();
         }catch(error){console.error(error)}

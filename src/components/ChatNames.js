@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AvatarPic from "../Pictures/Chat_main/logowotext.png";
 import axios from "axios";
-axios.defaults.baseURL = 'https://fox-codec-back.vercel.app';
+axios.defaults.baseURL = 'https://maze-verbena-rainstorm.glitch.me';// 'http://192.168.100.14:5000'
 
 
 const ChatNames = ({ onSearchUser }) => {
