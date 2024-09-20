@@ -9,7 +9,7 @@ import FormLogin from "../components/formlogin";
 const LandingPage = () => {
     return (
       <div className="h-screen w-screen bg-cover absolute top-0 left-0" style={{backgroundImage: `url(${LandingPagePic})`}}>
-        <div className="flex flex-row justify-evenly pt-64">
+        <div className="flex flex-row justify-evenly pt-40">
           <h2 className="font-bold text-5xl text-white italic leading-[100px] justify-center flex items-center ">
             Connect with Clarity,<br/> Speak with Strategy.
             </h2>
