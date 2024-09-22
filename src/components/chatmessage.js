@@ -4,7 +4,7 @@ import AvatarPic from "../Pictures/Chat_main/logowotext.png"
 
 
 
-const ChatMessage = ({content, user1, user2,friendname}) => {
+const ChatMessage = ({content, user1, user2,friendname,key}) => {
     const currentUserId = localStorage.getItem("userID")
     const isCurrentUser = currentUserId == user1;
     

@@ -24,7 +24,9 @@ const MainChat = ({friendData}) => {
             user2: friendid
         };
         axios.post(`/get-messages`, getmessagereq ).then((res) => {
-            setMessages(res.data);
+            const sortedMessages = res.data.sort((a, b) => a.id - b.id);
+        setMessages(sortedMessages);
+
         })
 
         
@@ -82,7 +84,7 @@ const MainChat = ({friendData}) => {
             <section ref={chatReferenceScroll} className="h-4/5 flex flex-col overflow-scroll no-scrollbar"> 
                 {messages.map((item,key) => {
                     return(
-                        <ChatMessage content={item.content} user1={item.sender_id} user2={item.receiver_id} friendname={friendData.username} />
+                        <ChatMessage content={item.content} user1={item.sender_id} user2={item.receiver_id} friendname={friendData.username} key={key} />
                     )
                 })}
             </section>
