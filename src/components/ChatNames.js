@@ -61,8 +61,8 @@ const ChatNames = ({ onSearchUser }) => {
 
         return (
             <div onClick={() => handleClick(item)} className={`rounded-xl pb-5 flex items-center flex-row pt-8 cursor-pointer ${isClicked? "opacity-50 bg-slate-400" : ""} hover:opacity-50`} key={item.id}>
-                <img src={AvatarPic} className="w-10 rounded-full ml-8" alt="Avatar" />
-                <div className="flex flex-col pl-8 justify-center">
+                <img src={AvatarPic} className="lg:w-10 w-6 rounded-full ml-8" alt="Avatar" />
+                <div className="lg:flex hidden flex-col pl-8 justify-center">
                     <h2 className="font-bold">{item.username}</h2>
                     <h3 className="font-medium">{`${messages[item.id]?.sender_id == userID? "You" : item.username}`}: {truncateMessage(latestMessage)} {formattedTime}</h3>
                 </div>
